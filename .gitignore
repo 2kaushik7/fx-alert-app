@@ -1,0 +1,77 @@
+# === Java/Spring Boot ===
+**/target/
+**/.classpath
+**/.project
+**/.settings/
+**/.idea/
+**/.mvn/
+**/build/
+**/out/
+**/logs/
+**/*.log
+
+# === Maven Wrapper ===
+**/mvnw.cmd
+**/mvnw
+**/.mvn/
+
+# === Gradle (if any service uses it) ===
+**/gradle/
+**/.gradle/
+**/build/
+
+# === Node/React Native (Mobile App) ===
+fx-alert-mobile/node_modules/
+fx-alert-mobile/.expo/
+fx-alert-mobile/.expo-shared/
+fx-alert-mobile/.vscode/
+fx-alert-mobile/dist/
+fx-alert-mobile/web-build/
+fx-alert-mobile/android/
+fx-alert-mobile/ios/
+fx-alert-mobile/*.log
+
+# Metro bundler cache
+fx-alert-mobile/.metro-cache/
+
+# React Native Packager
+*.packager.js
+
+# === Environment & Secrets ===
+*.env
+.env.*
+**/application-local.yml
+**/application-dev.yml
+**/secrets/
+**/config/*.local.yml
+**/config/*.env
+
+# === Docker & Build Artifacts ===
+**/*.jar
+**/*.war
+**/*.iml
+docker-compose.override.yml
+
+# === OS/Editor Files ===
+.DS_Store
+Thumbs.db
+*.swp
+
+# === Jenkins ===
+/jenkins_home/
+jenkins.log
+pipeline.log
+
+# === VS Code ===
+.vscode/
+
+# === Test Reports ===
+**/test-output/
+**/surefire-reports/
+**/jacoco.exec
+**/coverage/
+
+# === Misc ===
+*.pid
+*.lock
+

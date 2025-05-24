@@ -1,0 +1,21 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: rate-service
+          uri: http://rate-service:8087
+          predicates:
+            - Path=/api/rates/**
+        - id: alert-service
+          uri: http://alert-service:8088
+          predicates:
+            - Path=/api/alerts/**
+        - id: notification-lambda
+          uri: https://your-lambda-api-url.amazonaws.com/prod
+          predicates:
+            - Path=/api/notify/**
