@@ -1,0 +1,52 @@
+pipeline {
+  agent any
+
+  environment {
+    IMAGE_TAG = "${env.BUILD_NUMBER}"
+  }
+
+  stages {
+
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/2kaushik7/fx-alert-app.git'
+      }
+    }
+
+    stage('Build Docker Images') {
+      steps {
+        script {
+          docker.build("fx-rate-service", "./fx-rate-service")
+          docker.build("alert-service", "./alert-service")
+          docker.build("api-gateway", "./api-gateway")
+        }
+      }
+    }
+
+    stage('Stop and Remove Old Containers') {
+      steps {
+        sh '''
+          docker rm -f fx-rate-service || true
+          docker rm -f alert-service || true
+          docker rm -f api-gateway || true
+        '''
+      }
+    }
+
+    stage('Start via Docker Compose') {
+        steps {
+            sh 'docker-compose down || true'
+            sh 'docker-compose up -d --build'
+        }
+    }
+  }
+
+  post {
+    failure {
+      echo '❌ Build or Deployment Failed.'
+    }
+    success {
+      echo '✅ App deployed successfully.'
+    }
+  }
+}
