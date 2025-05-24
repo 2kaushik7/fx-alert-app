@@ -9,7 +9,7 @@ pipeline {
 
     stage('Checkout') {
       steps {
-        git 'https://github.com/2kaushik7/fx-alert-app.git', branch: 'main'
+        git url: 'https://github.com/2kaushik7/fx-alert-app.git', branch: 'main'
       }
     }
 
