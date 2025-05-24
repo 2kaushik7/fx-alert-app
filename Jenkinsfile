@@ -13,6 +13,20 @@ pipeline {
       }
     }
 
+    stage('Build JAR') {
+      steps {
+        dir('fx-rate-service') {
+          sh 'mvn clean package -DskipTests'
+        }
+        dir('alert-service') {
+          sh 'mvn clean package -DskipTests'
+        }
+        dir('api-gateway') {
+          sh 'mvn clean package -DskipTests'
+        }
+      }
+    }
+
     stage('Build Docker Images') {
       steps {
         script {
