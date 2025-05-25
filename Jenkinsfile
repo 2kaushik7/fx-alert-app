@@ -1,16 +1,16 @@
 pipeline {
-  agent {
-        docker {
-            image 'maven:3.9.6-eclipse-temurin-17'
-            args '-v /root/.m2:/root/.m2' // cache dependencies
-        }
-    }
+  agent any
 
   environment {
     IMAGE_TAG = "${env.BUILD_NUMBER}"
   }
 
   stages {
+    stage('Clean') {
+      steps {
+        deleteDir()
+      }
+    }
 
     stage('Checkout') {
       steps {
@@ -34,11 +34,9 @@ pipeline {
 
     stage('Build Docker Images') {
       steps {
-        script {
-          docker.build("fx-rate-service", "./fx-rate-service")
-          docker.build("alert-service", "./alert-service")
-          docker.build("api-gateway", "./api-gateway")
-        }
+        sh 'docker build -t fx-rate-service ./fx-rate-service'
+        sh 'docker build -t alert-service ./alert-service'
+        sh 'docker build -t api-gateway ./api-gateway'
       }
     }
 
